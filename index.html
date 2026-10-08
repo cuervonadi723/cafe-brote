@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brote Café de Barrio | Villa Crespo</title>
+<meta name="description" content="Café de especialidad en Villa Crespo. Menú, horarios y reservas online.">
+<meta property="og:title" content="Brote Café de Barrio">
+<meta property="og:description" content="Café de especialidad en Villa Crespo. Menú, horarios y reservas online.">
+<meta name="theme-color" content="#2140B8">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 29V12' stroke='%231C2620' stroke-width='2.4' stroke-linecap='round'/%3E%3Cpath d='M16 15c-7 0-11-4-11-10 7 0 11 4 11 10z' fill='%233F7A52'/%3E%3Cpath d='M16 12c0-5 3-8 10-8 0 5-3 8-10 8z' fill='%232140B8'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: azulejo-tile band behind a left-aligned hero; menu as a tabbed price list; info + booking side by side, stacking on phones */
+:root{
+  --bg:#EEF1EC; --surface:#FBFCFA; --ink:#1C2620; --muted:#5B675F;
+  --line:#CFD7D0; --accent:#2140B8; --accent-ink:#FFFFFF; --tile:#DCE3F5;
+  --leaf:#3F7A52;
+  --display:"Gloock", Georgia, "Times New Roman", serif;
+  --body:"Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#121915; --surface:#1A231E; --ink:#E7ECE8; --muted:#9DAAA1;
+  --line:#2E3A33; --accent:#7F98FF; --accent-ink:#0E1430; --tile:#1D2647; --leaf:#7FC093; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#121915; --surface:#1A231E; --ink:#E7ECE8; --muted:#9DAAA1;
+  --line:#2E3A33; --accent:#7F98FF; --accent-ink:#0E1430; --tile:#1D2647; --leaf:#7FC093; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6}
+.wrap{max-width:1080px;margin:0 auto;padding-inline:20px}
+a{color:inherit}
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.08;text-wrap:balance;margin:0}
+.label{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+
+/* header */
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-size:22px;text-decoration:none}
+.brand svg{width:26px;height:26px}
+nav{display:flex;gap:22px;font-weight:500;font-size:15px}
+nav a{text-decoration:none;color:var(--muted)}
+nav a:hover,nav a:focus-visible{color:var(--ink)}
+@media (max-width:640px){nav{display:none}}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:999px;font-weight:600;font-size:15px;text-decoration:none;border:1.5px solid var(--accent);cursor:pointer;font-family:var(--body);transition:transform .15s ease}
+.btn.primary{background:var(--accent);color:var(--accent-ink)}
+.btn.ghost{background:transparent;color:var(--accent)}
+.btn:hover{transform:translateY(-1px)}
+.btn:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+
+/* hero */
+.hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+.tiles{position:absolute;inset:0 0 0 52%;background-color:var(--tile);
+  background-image:
+   radial-gradient(circle at 0 0,var(--accent) 0 14px,transparent 15px),
+   radial-gradient(circle at 100% 0,var(--accent) 0 14px,transparent 15px),
+   radial-gradient(circle at 0 100%,var(--accent) 0 14px,transparent 15px),
+   radial-gradient(circle at 100% 100%,var(--accent) 0 14px,transparent 15px),
+   radial-gradient(circle at 50% 50%,transparent 0 17px,var(--accent) 18px 20px,transparent 21px);
+  background-size:56px 56px;opacity:.9}
+.hero .wrap{position:relative;display:grid;grid-template-columns:1.1fr .9fr;gap:32px;padding-block:72px 64px;align-items:center}
+.hero-copy{min-width:0}
+.hero h1{font-size:clamp(42px,6.4vw,76px);margin-block:14px 18px}
+.hero p.lead{font-size:18px;color:var(--muted);max-width:30em;margin:0 0 28px}
+.cta{display:flex;flex-wrap:wrap;gap:12px}
+.week{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:0 18px 40px -24px rgba(16,30,80,.45);min-width:0}
+.week h3{font-size:30px;margin-block:6px 4px}
+.week .origin{color:var(--muted);margin:0 0 16px}
+.specs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;border-block:1px solid var(--line);padding-block:14px;margin-bottom:14px}
+.specs div{display:flex;flex-direction:column;gap:2px}
+.specs b{font-family:var(--mono);font-weight:500;font-size:15px;font-variant-numeric:tabular-nums}
+.notes{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font-size:13px;padding:4px 10px;border-radius:999px;background:var(--bg);border:1px solid var(--line)}
+@media (max-width:820px){
+  .tiles{inset:auto 0 0 0;height:120px}
+  .hero .wrap{grid-template-columns:1fr;padding-block:44px 160px}
+}
+
+/* sections */
+section.block{padding-block:72px}
+.sec-head{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:16px;margin-bottom:28px}
+.sec-head h2{font-size:clamp(32px,4.4vw,48px)}
+
+/* menu */
+.tabs{display:flex;gap:6px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:4px;flex-wrap:wrap}
+.tabs button{border:0;background:transparent;color:var(--muted);font:600 14px var(--body);padding:8px 16px;border-radius:999px;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--accent);color:var(--accent-ink)}
+.menu{display:grid;grid-template-columns:1fr 1fr;column-gap:48px}
+@media (max-width:720px){.menu{grid-template-columns:1fr}}
+.item{display:grid;grid-template-columns:1fr auto;gap:4px 16px;padding-block:16px;border-bottom:1px dashed var(--line);min-width:0}
+.item h4{margin:0;font-size:17px;font-weight:600}
+.item .price{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:15px;align-self:start}
+.item p{grid-column:1/-1;margin:0;color:var(--muted);font-size:14.5px}
+.tag{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--leaf);margin-left:8px}
+
+/* info + booking */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+@media (max-width:820px){.split{grid-template-columns:1fr}}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:28px;min-width:0}
+.panel h3{font-size:28px;margin-bottom:16px}
+.hours{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+.hours td{padding:9px 0;border-bottom:1px solid var(--line)}
+.hours td:last-child{text-align:right;font-family:var(--mono);font-size:14.5px}
+.hours tr.today td{color:var(--accent);font-weight:600}
+.addr{margin:18px 0 0;display:grid;gap:6px}
+.addr span{color:var(--muted)}
+.wa{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:18px}
+.wa code{font-family:var(--mono);font-size:15px;background:var(--bg);border:1px solid var(--line);padding:8px 12px;border-radius:10px;user-select:all}
+form{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+form .full{grid-column:1/-1}
+label{display:grid;gap:6px;font-size:14px;font-weight:600}
+input,select{font:400 16px var(--body);color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:11px 12px;width:100%}
+.ok{grid-column:1/-1;margin:0;padding:12px 14px;border-radius:10px;background:var(--tile);font-size:14.5px}
+@media (max-width:460px){form{grid-template-columns:1fr}}
+
+footer{border-top:1px solid var(--line);padding-block:28px;color:var(--muted);font-size:14px}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+.demo{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+
+@media (prefers-reduced-motion:no-preference){
+  .week{animation:rise .7s ease both .1s}
+  @keyframes rise{from{transform:translateY(14px)}to{transform:none}}
+}
+</style>
+</head>
+<body>
+<div id="app"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
+<script>
+const { useState, Fragment } = React;
+const h = React.createElement;
+
+const MENU = {
+  "Café": [
+    { n: "Espresso", p: 2800, d: "Doble shot del café de la semana, 18 g de café en 36 g de bebida." },
+    { n: "Cortado", p: 3200, d: "Espresso con un toque de leche texturizada." },
+    { n: "Flat white", p: 3900, d: "Doble espresso y leche sedosa, taza de 180 ml." },
+    { n: "Filtrado V60", p: 4200, d: "Preparado a mano, ideal para probar las notas del grano.", t: "Lento" },
+    { n: "Cold brew", p: 4300, d: "Infusión en frío durante 18 horas, servido con hielo." },
+    { n: "Latte de avena", p: 4400, d: "Con bebida de avena barista, sin lactosa.", t: "Vegano" }
+  ],
+  "Pastelería": [
+    { n: "Medialuna de manteca", p: 1300, d: "Horneada cada mañana en el local." },
+    { n: "Budín de limón y amapola", p: 2600, d: "Porción generosa, con glaseado cítrico." },
+    { n: "Alfajor de maicena", p: 2200, d: "Dulce de leche repostero y coco rallado." },
+    { n: "Cookie de chocolate amargo", p: 2400, d: "70% cacao y escamas de sal.", t: "Sin TACC" }
+  ],
+  "Brunch": [
+    { n: "Tostón de palta", p: 7800, d: "Pan de masa madre, palta, huevo poché y semillas." },
+    { n: "Bowl de yogur y granola", p: 6200, d: "Granola casera, frutas de estación y miel.", t: "Vegetariano" },
+    { n: "Revuelto con hongos", p: 7400, d: "Huevos de campo, hongos salteados y ciboulette." },
+    { n: "Combo Brote", p: 9900, d: "Café a elección, jugo de naranja y tostón a elección." }
+  ]
+};
+const DAYS = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+const WEEK = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
+const HOURS = {
+  Lunes: "08:00 – 19:00", Martes: "08:00 – 19:00", Miércoles: "08:00 – 19:00",
+  Jueves: "08:00 – 19:00", Viernes: "08:00 – 20:00", Sábado: "09:00 – 20:00", Domingo: "09:00 – 14:00"
+};
+const PHONE = "+54 9 11 0000-0000";
+const formatPrice = n => "$ " + n.toLocaleString("es-AR");
+
+function Logo() {
+  return h("svg", { viewBox: "0 0 32 32", "aria-hidden": "true" },
+    h("path", { d: "M16 29V12", stroke: "currentColor", strokeWidth: 2.4, fill: "none", strokeLinecap: "round" }),
+    h("path", { d: "M16 15c-7 0-11-4-11-10 7 0 11 4 11 10z", fill: "var(--leaf)" }),
+    h("path", { d: "M16 12c0-5 3-8 10-8 0 5-3 8-10 8z", fill: "var(--accent)" })
+  );
+}
+
+function Header() {
+  return h("header", { className: "top" },
+    h("div", { className: "wrap" },
+      h("a", { className: "brand", href: "#inicio" }, h(Logo), "Brote"),
+      h("nav", null,
+        h("a", { href: "#menu" }, "Menú"),
+        h("a", { href: "#visitanos" }, "Horarios"),
+        h("a", { href: "#reservas" }, "Reservas")
+      ),
+      h("a", { className: "btn primary", href: "#reservas" }, "Reservar")
+    )
+  );
+}
+
+function Hero() {
+  const spec = (label, value) => h("div", null, h("span", { className: "label" }, label), h("b", null, value));
+  return h("section", { className: "hero", id: "inicio" },
+    h("div", { className: "tiles", "aria-hidden": "true" }),
+    h("div", { className: "wrap" },
+      h("div", { className: "hero-copy" },
+        h("div", { className: "label" }, "Café de especialidad · Villa Crespo"),
+        h("h1", null, "Café de barrio, tostado con paciencia."),
+        h("p", { className: "lead" }, "Granos de origen único, medialunas que salen del horno a las 8 y una mesa larga para quedarse. Vení a desayunar, a trabajar un rato o a llevarte un cortado."),
+        h("div", { className: "cta" },
+          h("a", { className: "btn primary", href: "#menu" }, "Ver el menú"),
+          h("a", { className: "btn ghost", href: "#reservas" }, "Reservar una mesa")
+        )
+      ),
+      h("aside", { className: "week" },
+        h("div", { className: "label" }, "Café de la semana"),
+        h("h3", null, "Huila, Colombia"),
+        h("p", { className: "origin" }, "Finca El Mirador · variedad Caturra"),
+        h("div", { className: "specs" }, spec("Altura", "1.750 msnm"), spec("Proceso", "Lavado"), spec("Tueste", "Medio")),
+        h("div", { className: "notes" }, ["Panela", "Naranja", "Cacao"].map(n => h("span", { className: "chip", key: n }, n)))
+      )
+    )
+  );
+}
+
+function Menu() {
+  const [tab, setTab] = useState("Café");
+  return h("section", { className: "block", id: "menu" },
+    h("div", { className: "wrap" },
+      h("div", { className: "sec-head" },
+        h("div", null, h("div", { className: "label" }, "Carta"), h("h2", null, "Nuestro menú")),
+        h("div", { className: "tabs", role: "tablist" },
+          Object.keys(MENU).map(k => h("button", {
+            key: k, role: "tab", "aria-selected": tab === k, onClick: () => setTab(k)
+          }, k))
+        )
+      ),
+      h("div", { className: "menu" },
+        MENU[tab].map(item => h("div", { className: "item", key: item.n },
+          h("h4", null, item.n, item.t ? h("span", { className: "tag" }, item.t) : null),
+          h("span", { className: "price" }, formatPrice(item.p)),
+          h("p", null, item.d)
+        ))
+      )
+    )
+  );
+}
+
+function Info() {
+  const today = DAYS[new Date().getDay()];
+  const [copied, setCopied] = useState(false);
+  const copy = () => {
+    try {
+      navigator.clipboard.writeText(PHONE).then(() => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 1800);
+      }).catch(() => {});
+    } catch (e) {}
+  };
+  return h("div", { className: "panel", id: "visitanos" },
+    h("div", { className: "label" }, "Visitanos"),
+    h("h3", null, "Horarios y ubicación"),
+    h("table", { className: "hours" },
+      h("tbody", null, WEEK.map(d => h("tr", { key: d, className: d === today ? "today" : "" },
+        h("td", null, d + (d === today ? " · hoy" : "")),
+        h("td", null, HOURS[d])
+      )))
+    ),
+    h("div", { className: "addr" },
+      h("b", null, "Av. Corrientes 5100, Villa Crespo"),
+      h("span", null, "A dos cuadras del subte B, estación Malabia.")
+    ),
+    h("div", { className: "wa" },
+      h("code", null, PHONE),
+      h("button", { className: "btn ghost", type: "button", onClick: copy }, copied ? "Copiado" : "Copiar WhatsApp")
+    )
+  );
+}
+
+function Booking() {
+  const [form, setForm] = useState({ nombre: "", personas: "2", dia: "", hora: "10:00" });
+  const [sent, setSent] = useState(false);
+  const update = key => e => { setForm({ ...form, [key]: e.target.value }); setSent(false); };
+  const submit = e => { e.preventDefault(); setSent(true); };
+  const options = list => list.map(v => h("option", { key: v }, v));
+
+  return h("div", { className: "panel", id: "reservas" },
+    h("div", { className: "label" }, "Reservas"),
+    h("h3", null, "Reservá tu mesa"),
+    h("form", { onSubmit: submit },
+      h("label", { className: "full", htmlFor: "nombre" }, "Nombre",
+        h("input", { id: "nombre", required: true, value: form.nombre, onChange: update("nombre"), placeholder: "Ej.: Sofía Méndez" })),
+      h("label", { htmlFor: "personas" }, "Personas",
+        h("select", { id: "personas", value: form.personas, onChange: update("personas") }, options(["1", "2", "3", "4", "5", "6"]))),
+      h("label", { htmlFor: "hora" }, "Hora",
+        h("select", { id: "hora", value: form.hora, onChange: update("hora") }, options(["09:00", "10:00", "11:00", "12:00", "16:00", "17:00", "18:00"]))),
+      h("label", { className: "full", htmlFor: "dia" }, "Día",
+        h("input", { id: "dia", type: "date", required: true, value: form.dia, onChange: update("dia") })),
+      h("button", { className: "btn primary full", type: "submit" }, "Confirmar reserva"),
+      sent ? h("p", { className: "ok", role: "status" },
+        `Listo, ${form.nombre.split(" ")[0]}: mesa para ${form.personas} a las ${form.hora}. En el sitio real, la reserva llegaría al local por WhatsApp y por email.`) : null
+    )
+  );
+}
+
+function App() {
+  return h(Fragment, null,
+    h(Header),
+    h(Hero),
+    h(Menu),
+    h("section", { className: "block", style: { paddingTop: 0 } },
+      h("div", { className: "wrap split" }, h(Info), h(Booking))
+    ),
+    h("footer", null,
+      h("div", { className: "wrap" },
+        h("span", null, "© 2026 Brote Café de Barrio"),
+        h("span", { className: "demo" }, "Proyecto demo · Diseño y desarrollo: Nadir")
+      )
+    )
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("app")).render(h(App));
+</script>
+</body>
+</html>
